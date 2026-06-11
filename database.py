@@ -4,9 +4,8 @@ import os
 
 def init_db():
     """
-    Initiates the database, verifies or creates required directory.
-    Establishes connection to database.
-    Creates "expenses" table.
+    Initiates database, establishes connection. 
+    Creates the expenses table.
     """
         
     os.makedirs('data', exist_ok=True)
@@ -25,10 +24,17 @@ def init_db():
 
 def save_expense(expense_dict):
     """
-    Takes expense dictionary as argument.
-    Establishes connection to database.
-    Inserts the data into a new row of "expenses" table.
-    Confirms the save by showing "lastrowid".
+    Takes expense dictionary as argument, and saves that information inside the database.
+    Confirms the save using lastrowid.
+
+    Args:
+        expense_dict (dict): Dictionary of expense details returned by json_to_dict() inside llm.py.
+
+    Returns:
+        None
+
+    Raises:
+        KeyError: If expense_dict is missing required keys.
     """
 
 
@@ -52,10 +58,14 @@ def save_expense(expense_dict):
 
 def fetch_expenses():
     """
-    Establishes a new connection.
-    Retrieves all data from "expenses" table.
-    Returns a list of all expenses, each item in the list is a sqlite.Row object!  
-    If table is empty, it returns an empty list.
+    Retrieves all data from "expenses" table and returns it.
+
+    Args:
+        None
+
+    Returns:
+        list: All rows from the expenses table as sqlite3.Row objects.
+        Returns an empty list if the table is empty.
     """
 
     with sqlite3.connect("data/expenses.db") as conn:
