@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 rough_work.py
+rough.py
+data/expenses.db
